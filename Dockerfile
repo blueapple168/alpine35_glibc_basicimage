@@ -1,4 +1,4 @@
-FROM  alpine:3.7
+FROM  alpine:3.5
 
 MAINTAINER blueapple <blueapple1120@qq.com>
 
