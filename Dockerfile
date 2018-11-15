@@ -10,7 +10,12 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates wget libgcc \
     && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
     && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \
     && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-i18n-${GLIBC_VERSION}.apk \
-    && apk add --allow-untrusted glibc-bin-${GLIBC_VERSION}.apk glibc-${GLIBC_VERSION}.apk glibc-i18n-${GLIBC_VERSION}.apk
+    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-dev-${GLIBC_VERSION}.apk \
+    && apk add --allow-untrusted \
+       glibc-bin-${GLIBC_VERSION}.apk \
+       glibc-${GLIBC_VERSION}.apk \
+       glibc-i18n-${GLIBC_VERSION}.apk \
+       glibc-dev-${GLIBC_VERSION}.apk
 
 # Install openjdk8
 RUN apk update \
@@ -22,7 +27,8 @@ RUN apk update \
     && apk del .build-deps \
     && rm -rf /glibc-bin-${GLIBC_VERSION}.apk \
     && rm -rf /glibc-${GLIBC_VERSION}.apk \
-    && rm -rf /glibc-i18n-${GLIBC_VERSION}.apk
+    && rm -rf /glibc-i18n-${GLIBC_VERSION}.apk \
+    && rm -rf /glibc-dev-${GLIBC_VERSION}.apk
 
 # Set environment
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
