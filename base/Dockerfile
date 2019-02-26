@@ -46,7 +46,7 @@ RUN set -x \
     && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-    && wget -O /usr/local/bin/gosu "https://github.com/blueapple168/alpine35_glibc_basicimage/raw/master/gosu-$dpkgArch" \
+    && wget --no-check-certificate -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
     && chmod +x /usr/local/bin/gosu \
     && ln -s /usr/local/bin/gosu /usr/bin/gosu \
     && gosu nobody true \
