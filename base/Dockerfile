@@ -36,7 +36,22 @@ RUN set -x \
     && apk add --no-cache \
         openjdk8="$JAVA_ALPINE_VERSION" \
     && [ "$JAVA_HOME" = "$(docker-java-home)" ]
-
+# Install gosu && set time zone
+RUN set -x \
+    && apk add --no-cache --virtual \
+    .gosu-deps \
+    dpkg \
+    tzdata \
+    tree \
+    ca-certificates \
+    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget --no-check-certificate -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
+    && chmod +x /usr/local/bin/gosu \
+    && ln -s /usr/local/bin/gosu /usr/bin/gosu \
+    && gosu nobody true \
+    && apk del .gosu-deps dpkg
 #Install other app
 RUN apk add --update && \
     apk upgrade && \
@@ -46,7 +61,6 @@ RUN apk add --update && \
     curl \
     wget \
     vim \
-    ca-certificates \
     libgcc \
     ttf-dejavu \
     busybox-extras \
@@ -106,19 +120,3 @@ RUN apk add --update && \
     ' >> /etc/profile \
     && echo '. ~/.bashrc' > /root/.bash_profile \
     && echo '. /etc/profile' > /root/.bashrc
-
-# Install gosu && set time zone
-RUN set -x \
-    && apk add --no-cache --virtual \
-    .gosu-deps \
-    dpkg \
-    tzdata \
-    tree \
-    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
-    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-    && wget --no-check-certificate -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
-    && chmod +x /usr/local/bin/gosu \
-    && ln -s /usr/local/bin/gosu /usr/bin/gosu \
-    && gosu nobody true \
-    && apk del .gosu-deps dpkg
