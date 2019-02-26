@@ -70,7 +70,6 @@ RUN apk add --update && \
     mkfontscale \
     mkfontdir \
     fontconfig \
-    git \
     dumb-init \
     su-exec \
     coreutils \
@@ -106,6 +105,7 @@ RUN apk add --update && \
                        tree \
                        tzdata \
                        glibc-i18n \
+                       openssl \
                        
 # Set alias ll、ls、mv、rm                       
     && echo '\
