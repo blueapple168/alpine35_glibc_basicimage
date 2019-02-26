@@ -44,6 +44,7 @@ RUN set -x \
     tzdata \
     tree \
     ca-certificates \
+    openssl \
     && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
