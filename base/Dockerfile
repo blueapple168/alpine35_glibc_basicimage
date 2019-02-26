@@ -64,7 +64,7 @@ RUN apk add --update && \
     vim \
     libgcc \
     ttf-dejavu \
-    busybox-extras \
+    busybox \
     tree \
     tzdata \
     mkfontscale \
