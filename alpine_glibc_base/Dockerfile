@@ -29,7 +29,6 @@ RUN apk add --update \
     mkfontscale \
     mkfontdir \
     fontconfig \
-    git \
     && rm /var/cache/apk/* \
     && echo "securerandom.source=file:/dev/urandom" >> /usr/lib/jvm/default-jvm/jre/lib/security/java.security \
 # Install glibc
