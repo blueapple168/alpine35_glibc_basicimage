@@ -1,8 +1,8 @@
-FROM  alpine:3.5
+FROM  alpine:3.8
 
 MAINTAINER blueapple <blueapple1120@qq.com>
 
-ENV GLIBC_VERSION=2.26-r0
+ENV GLIBC_VERSION=2.28-r0
 
 # Install glibc
 RUN apk add --no-cache --virtual .build-deps ca-certificates wget libgcc \
