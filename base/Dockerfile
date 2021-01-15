@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.5
+ARG ALPINE_VERSION=3.8
 FROM alpine:$ALPINE_VERSION as baseimage
 MAINTAINER blueapple <blueapple1120@qq.com>
 
@@ -6,7 +6,7 @@ MAINTAINER blueapple <blueapple1120@qq.com>
 ENV LANG C.UTF-8
 ENV LANGUAGE zh_CN:zh  
 ENV LC_ALL zh_CN.UTF-8
-ENV GLIBC_VERSION=2.26-r0
+ENV GLIBC_VERSION=2.28-r0
 
 USER root
 
